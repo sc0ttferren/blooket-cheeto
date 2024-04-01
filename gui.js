@@ -51,7 +51,7 @@
         buttons['crypto'].push(setCryptoButton);
         buttons['gold'].push(setGoldButton);
 
-        // Make the GUI draggable
+        
         var offsetX = 0, offsetY = 0;
         guiContainer.onmousedown = function(e) {
             offsetX = e.clientX - guiContainer.getBoundingClientRect().left;
