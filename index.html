@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooket Cheeto</title>
+  <style>
+    body {
+      background-color: #f6f6f6;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #ff652f;
+    }
+    button {
+      background-color: #ff652f;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:active {
+      background-color: #e63b00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bookmarklet GUI</h1>
+    <button id="bookmarkletBtn">Copy Code</button>
+    <h2>Console GUI</h2>
+    <button id="consoleBtn">Copy Code</button>
+  </div>
+
+  <script>
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    function updateButtonText(buttonId, text) {
+      const button = document.getElementById(buttonId);
+      button.innerText = text;
+      setTimeout(() => {
+        button.innerText = "Copy Code";
+      }, 1500);
+    }
+
+    document.getElementById('bookmarkletBtn').addEventListener('click', () => {
+      fetch('https://raw.githubusercontent.com/sc0ttferren/blooket-cheeto/main/guimin.js')
+        .then(response => response.text())
+        .then(data => {
+          copyToClipboard(data);
+          updateButtonText('bookmarkletBtn', 'Copied');
+        })
+        .catch(error => console.error('Error fetching bookmarklet code:', error));
+    });
+
+    document.getElementById('consoleBtn').addEventListener('click', () => {
+      fetch('https://raw.githubusercontent.com/sc0ttferren/blooket-cheeto/main/gui.js')
+        .then(response => response.text())
+        .then(data => {
+          copyToClipboard(data);
+          updateButtonText('consoleBtn', 'Copied');
+        })
+        .catch(error => console.error('Error fetching console code:', error));
+    });
+  </script>
+</body>
+</html>
